@@ -1,0 +1,35 @@
+version: "2"
+services:
+
+  minio:
+    image: minio/minio:latest
+    expose:
+      - "9000"
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./minio/data:/export
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: miniostorage
+    command: server /export
+    restart: always
+
+
+  webdav:
+    image: toby1991/rclone-webdav:latest
+  #  volumes:
+  #    - ./rclone/rclone.conf:/root/.config/rclone/rclone.conf
+    environment:
+      BUCKET: rclone
+      AUTH_USER: rclone
+      AUTH_PASS: rclone123
+    depends_on:
+      - minio
+    links:
+      - minio
+    expose:
+      - "80"
+    ports:
+      - "80:80"
+    restart: always
