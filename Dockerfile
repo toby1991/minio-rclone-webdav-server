@@ -21,5 +21,5 @@ COPY --from=builder /bin/rclone /rclone
 WORKDIR /
 
 # Run the server binary.
-ENTRYPOINT /rclone -v --no-check-certificate serve webdav minio:${BUCKET} --vfs-cache-mode writes --addr :80 --user ${AUTH_USER} --pass ${AUTH_PASS}
+ENTRYPOINT /rclone -v --no-check-certificate serve webdav minio:${BUCKET} --disable-dir-list --vfs-cache-mode writes --addr :80 --user ${AUTH_USER} --pass ${AUTH_PASS} 
 EXPOSE 80
