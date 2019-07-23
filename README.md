@@ -1,5 +1,8 @@
 # minio-rclone-webdav-server
+
 A @rclone served WebDAV server with @minio as the s3 storage backend docker example
+
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/totoval/mindav.svg)
 
 ## Run
 ```bash
