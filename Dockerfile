@@ -16,6 +16,18 @@ ENV BUCKET=rclone
 ENV AUTH_USER=rclone
 ENV AUTH_PASS=rclone123
 
+RUN apk update \
+	&& apk add --no-cache fuse \
+	&& sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
+
+# cleanup
+RUN apk del --purge \
+		build-dependencies\
+	&&  rm -rf \
+		/tmp/* \
+		/var/tmp/* \
+		/var/cache/apk/*
+
 COPY ./rclone.conf /root/.config/rclone/rclone.conf
 COPY --from=builder /bin/rclone /rclone
 WORKDIR /
