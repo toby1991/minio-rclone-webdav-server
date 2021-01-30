@@ -21,8 +21,7 @@ RUN apk update \
 	&& sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
 
 # cleanup
-RUN apk del --purge \
-	&& rm -rf /tmp/* \
+RUN rm -rf /tmp/* \
 	&& rm -rf /var/tmp/* \
 	&& rm -rf /var/cache/apk/*
 
