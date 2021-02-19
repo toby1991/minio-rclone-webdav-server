@@ -15,6 +15,7 @@ FROM alpine:latest
 ENV BUCKET=rclone
 ENV AUTH_USER=rclone
 ENV AUTH_PASS=rclone123
+ENV BASE_URL=/
 
 RUN apk update \
 	&& apk add --no-cache fuse \
@@ -30,5 +31,5 @@ COPY --from=builder /bin/rclone /rclone
 WORKDIR /
 
 # Run the server binary.
-ENTRYPOINT /rclone -v --no-check-certificate serve webdav minio:${BUCKET} --disable-dir-list --vfs-cache-mode writes --addr :80 --user ${AUTH_USER} --pass ${AUTH_PASS} 
+ENTRYPOINT /rclone -v --no-check-certificate serve webdav minio:${BUCKET} --disable-dir-list --vfs-cache-mode writes --addr :80 --user ${AUTH_USER} --pass ${AUTH_PASS} --baseurl ${BASE_URL}
 EXPOSE 80
