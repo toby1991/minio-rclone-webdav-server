@@ -2,7 +2,7 @@
 # STEP 1 build executable binary
 ############################
 FROM alpine:latest AS builder
-ENV RCLONE_VERSION=v1.53.4
+ENV RCLONE_VERSION=v1.56.0
 WORKDIR /bin/
 RUN wget https://github.com/ncw/rclone/releases/download/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-amd64.zip -O ./rclone.zip \ 
 	&& unzip ./rclone.zip -d ./ \ 
