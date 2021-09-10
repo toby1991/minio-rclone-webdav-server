@@ -27,7 +27,7 @@ RUN rm -rf /tmp/* \
 	&& rm -rf /var/tmp/* \
 	&& rm -rf /var/cache/apk/*
 
-VOLUME ["/root/.config/rclone/rclone.conf", "/root/.cache/rclone/webgui"]
+VOLUME ["/root/.config/rclone", "/root/.cache/rclone/webgui"]
 
 COPY ./rclone.conf /root/.config/rclone/rclone.conf
 COPY --from=builder /bin/rclone /rclone
