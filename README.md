@@ -14,7 +14,12 @@ docker-compose up -d
 Then use your favorite WebDAV connect:
 * Host: `http://127.0.0.1:80`
 * Username: `rclone`
-* Password `rclone123`
+* Password: `rclone123`
+
+## Dashboard
+* Host: `http://127.0.0.1:5572`
+* Username: `gui`
+* Password: `gui123`
 
 ## Fuse
 add `--cap-add SYS_ADMIN --device /dev/fuse --security-opt apparmor:unconfine` when running.
