@@ -15,6 +15,8 @@ FROM alpine:latest
 ENV BUCKET=rclone
 ENV AUTH_USER=rclone
 ENV AUTH_PASS=rclone123
+ENV RC_USER=gui
+ENV RC_PASS=gui123
 
 RUN apk update \
 	&& apk add --no-cache fuse \
@@ -30,5 +32,6 @@ COPY --from=builder /bin/rclone /rclone
 WORKDIR /
 
 # Run the server binary.
-ENTRYPOINT /rclone -v --no-check-certificate serve ftp minio:${BUCKET} --vfs-cache-mode writes --addr :80 --user ${AUTH_USER} --pass ${AUTH_PASS} 
+ENTRYPOINT /rclone -v --no-check-certificate --rc --rc-web-gui --rc-web-gui-no-open-browser --rc-user ${RC_USER} --rc-pass ${RC_PASS} --rc-addr :5572 --rc-serve  serve ftp minio:${BUCKET} --vfs-cache-mode writes --addr :80 --user ${AUTH_USER} --pass ${AUTH_PASS} 
 EXPOSE 80
+EXPOSE 5572
