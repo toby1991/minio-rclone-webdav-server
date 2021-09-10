@@ -16,6 +16,8 @@ ENV BUCKET=rclone
 ENV AUTH_USER=rclone
 ENV AUTH_PASS=rclone123
 ENV BASE_URL=/
+ENV RC_USER=gui
+ENV RC_PASS=gui123
 
 RUN apk update \
 	&& apk add --no-cache fuse \
@@ -31,5 +33,6 @@ COPY --from=builder /bin/rclone /rclone
 WORKDIR /
 
 # Run the server binary.
-ENTRYPOINT /rclone -v --no-check-certificate serve webdav minio:${BUCKET} --disable-dir-list --vfs-cache-mode writes --addr :80 --user ${AUTH_USER} --pass ${AUTH_PASS} --baseurl ${BASE_URL}
+ENTRYPOINT /rclone -v --no-check-certificate --rc --rc-web-gui --rc-web-gui-no-open-browser --rc-user ${RC_USER} --rc-pass ${RC_PASS} --rc-addr :5572 --rc-serve serve webdav minio:${BUCKET} --disable-dir-list --vfs-cache-mode writes --addr :80 --user ${AUTH_USER} --pass ${AUTH_PASS} --baseurl ${BASE_URL}
 EXPOSE 80
+EXPOSE 5572
