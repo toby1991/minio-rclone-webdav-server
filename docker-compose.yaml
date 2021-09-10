@@ -24,12 +24,18 @@ services:
       BUCKET: rclone
       AUTH_USER: rclone
       AUTH_PASS: rclone123
+      BUCKET: rclone
+      BASE_URL: /
+      RC_USER: gui
+      RC_PASS: gui123
     depends_on:
       - minio
     links:
       - minio
     expose:
       - "80"
+      - "5572"
     ports:
       - "80:80"
+      - "5572:5572"
     restart: always
