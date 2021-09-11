@@ -5,10 +5,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Publish to Registry
+    - name: Publish default to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: toby1991/rclone-webdav
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+        dockerfile: Dockerfile
         tags: "latest"
+    - name: Publish restic to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: toby1991/rclone-webdav
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        dockerfile: Dockerfile.restic
+        tags: "restic"
