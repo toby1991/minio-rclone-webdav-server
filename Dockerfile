@@ -12,6 +12,7 @@ RUN wget https://github.com/ncw/rclone/releases/download/${RCLONE_VERSION}/rclon
 # STEP 2 build a small server image
 ############################
 FROM alpine:latest
+ENV S3_URL=minio
 ENV BUCKET=rclone
 ENV AUTH_USER=rclone
 ENV AUTH_PASS=rclone123
@@ -35,6 +36,6 @@ COPY --from=builder /bin/rclone /rclone
 WORKDIR /
 
 # Run the server binary.
-ENTRYPOINT /rclone -v --no-check-certificate --rc --rc-web-gui --rc-web-gui-no-open-browser --rc-user ${RC_USER} --rc-pass ${RC_PASS} --rc-addr :5572 --rc-serve serve webdav minio:${BUCKET} --disable-dir-list --vfs-cache-mode writes --addr :80 --user ${AUTH_USER} --pass ${AUTH_PASS} --baseurl ${BASE_URL}
+ENTRYPOINT /rclone -v --no-check-certificate --rc --rc-web-gui --rc-web-gui-no-open-browser --rc-user ${RC_USER} --rc-pass ${RC_PASS} --rc-addr :5572 --rc-serve serve webdav ${S3_URL}:${BUCKET} --disable-dir-list --vfs-cache-mode writes --addr :80 --user ${AUTH_USER} --pass ${AUTH_PASS} --baseurl ${BASE_URL}
 EXPOSE 80
 EXPOSE 5572
