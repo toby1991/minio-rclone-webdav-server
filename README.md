@@ -17,18 +17,28 @@ Then use your favorite WebDAV connect:
 * Password: `rclone123`
 
 ## Env Configuration
+> Your Minio Bucket Name
 ```
-# Your Minio Bucket Name
-BUCKET: rclone  
-# Your Webdav basic-auth username
+BUCKET: rclone
+```
+> Your Webdav basic-auth username
+```
 AUTH_USER: rclone
-# Your Webdav basic-auth password
+```
+> Your Webdav basic-auth password
+```
 AUTH_PASS: rclone123
-# Your Webdav access base path, default "/", usually used for Webdav behind nginx/traefik
+```
+> Your Webdav access base path, default "/", usually used for Webdav behind nginx/traefik
+```
 BASE_URL: /
-# Your Rclone WebGUI username
+```
+> Your Rclone WebGUI username
+```
 RC_USER: gui
-# Your Rclone WebGUI password
+```
+> Your Rclone WebGUI password
+```
 RC_PASS: gui123
 ```
 
