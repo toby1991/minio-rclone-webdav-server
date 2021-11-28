@@ -24,7 +24,6 @@ services:
       BUCKET: rclone
       AUTH_USER: rclone
       AUTH_PASS: rclone123
-      BUCKET: rclone
       BASE_URL: /
       RC_USER: gui
       RC_PASS: gui123
